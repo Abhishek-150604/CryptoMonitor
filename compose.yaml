@@ -1,0 +1,15 @@
+services:
+
+ backend:
+   build: .\backend
+   ports:
+       - 8000:8000
+
+ frontend:
+    build: .\crypto-monitor-frontend
+    ports:
+        - 9000:9000
+    depends_on:
+      - backend
+
+  

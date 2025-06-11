@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const WatchlistButton = ({ coinId }) => {
-  const [watchlist, setWatchlist] = useState(
-    JSON.parse(localStorage.getItem("watchlist")) || []
-  );
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-  const isInWatchlist = watchlist.includes(coinId);
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("watchlist")) || [];
+    setIsInWatchlist(stored.includes(coinId));
+  }, [coinId]);
 
   const toggleWatchlist = () => {
+    const stored = JSON.parse(localStorage.getItem("watchlist")) || [];
     let updated;
-    if (isInWatchlist) {
-      updated = watchlist.filter(id => id !== coinId);
+
+    if (stored.includes(coinId)) {
+      updated = stored.filter(id => id !== coinId);
     } else {
-      updated = [...watchlist, coinId];
+      updated = [...stored, coinId];
     }
+
     localStorage.setItem("watchlist", JSON.stringify(updated));
-    setWatchlist(updated);
+    setIsInWatchlist(updated.includes(coinId));
   };
 
   return (

@@ -1,5 +1,3 @@
-// src/pages/CoinDetailPage.js
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
@@ -48,7 +46,7 @@ const CoinDetailPage = () => {
     }),
     datasets: [
       {
-        label: `₹{id} Price (USD)`,
+        label: `${id} Price (USD)`, // Corrected label
         data: historicalData?.map((d) => d[1]),
         fill: false,
         borderColor: "#FFD700",
@@ -70,3 +68,4 @@ const CoinDetailPage = () => {
 };
 
 export default CoinDetailPage;
+
